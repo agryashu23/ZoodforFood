@@ -1,8 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zoodforfood/utils/color_constant.dart';
 import 'package:zoodforfood/utils/image_constant.dart';
 import 'package:zoodforfood/utils/math_utils.dart';
+import 'package:zoodforfood/widgets/filters.dart';
+import 'package:zoodforfood/widgets/foryou.dart';
+import 'package:zoodforfood/widgets/foryoucook.dart';
+import 'package:zoodforfood/widgets/group53_item_widget.dart';
 
 import 'database.dart';
 
@@ -12,6 +17,9 @@ class MainPAge extends StatefulWidget {
 }
 
 class _MainPAgeState extends State<MainPAge> with SingleTickerProviderStateMixin{
+  List filters = ["Taste" , "Cuisine" , "Mode" , "Type" , "Taste1" , "Taste2"];
+  String _site = 'To Cook';
+
   @override
   Widget build(BuildContext context) {
   var wSize = MediaQuery.of(context).size.width;
@@ -159,13 +167,13 @@ class _MainPAgeState extends State<MainPAge> with SingleTickerProviderStateMixin
 
                             ),
                             child: Text(
-                              "For you",
+                              "For you-",
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 color: ColorConstant.black900,
                                 fontSize: getFontSize(
-                                  20,
+                                  24,
                                 ),
                                 fontFamily: 'Biryani',
                                 fontWeight: FontWeight.w700,
@@ -174,8 +182,7 @@ class _MainPAgeState extends State<MainPAge> with SingleTickerProviderStateMixin
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: hSize*0.02,horizontal: wSize*0.04),
-
+                          margin: EdgeInsets.symmetric(vertical: hSize*0.012,horizontal: wSize*0.04),
                           decoration: BoxDecoration(
                             color: ColorConstant.gray100,
                             borderRadius: BorderRadius.circular(
@@ -201,186 +208,91 @@ class _MainPAgeState extends State<MainPAge> with SingleTickerProviderStateMixin
                           ),
                           child: DefaultTabController(
                             length: 2,
-                            child: Scaffold(
-                              appBar: AppBar(
-                                bottom: TabBar(
-                                  tabs:  [
-                                    Tab(
-                                        child: Text(
-                                          "To Dine/Order",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: ColorConstant.whiteA700,
-                                            fontSize: getFontSize(
-                                              16,
-                                            ),
-                                            fontFamily: 'Biryani',
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        )),
-                                    Tab(child: Text(
-                                      "To Cook",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: ColorConstant.deepOrange5007f,
-                                        fontSize: getFontSize(
-                                          16,
-                                        ),
-                                        fontFamily: 'Biryani',
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            height: getVerticalSize(
-                              139.00,
-                            ),
-                            width: size.width,
-                            margin: EdgeInsets.only(
-                              top: getVerticalSize(
-                                10.00,
-                              ),
-                            ),
-                            child: Stack(
-                              alignment: Alignment.bottomCenter,
+                            child:  Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          left: getHorizontalSize(
-                                            159.00,
-                                          ),
-                                          right: getHorizontalSize(
-                                            159.00,
-                                          ),
-                                        ),
-                                        child: Text(
-                                          "Explore more",
-                                          overflow: TextOverflow.ellipsis,
+                                Container(
+                                  height:hSize*0.06,
+                                  decoration: BoxDecoration(
+                                    color: ColorConstant.orangeA2007f,
+                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(getHorizontalSize(
+                                      10.00,
+                                    ),),
+                                        topRight: Radius.circular( getHorizontalSize(
+                                      10.00,
+                                    ),)
+                                    )
+                                  ),
+                                  child: TabBar(
+                                    labelColor: ColorConstant.whiteA700,
+                                    unselectedLabelColor: ColorConstant.deepOrange5007f,
+                                    // labelStyle: TextStyle(
+                                    //   color: ColorConstant.whiteA700,
+                                    // ),
+                                    // unselectedLabelStyle: TextStyle(color:ColorConstant.deepOrange5007f,),
+                                    indicator: BoxDecoration(
+                                      color: ColorConstant.deepOrangeA400,
+                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(getHorizontalSize(
+    10.00,),),
+                                        topRight: Radius.circular(getHorizontalSize(
+                                        10.00,),),
+                                      )
+                                    ),
+                                      tabs:  [
+                                        Tab(
+                                            child: Text(
+                                              "To Dine/Order",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: getFontSize(
+                                                  16,
+                                                ),
+                                                fontFamily: 'Biryani',
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            )),
+                                        Tab(child: Text(
+                                          "To Cook",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            color:
-                                                ColorConstant.deepOrange700,
                                             fontSize: getFontSize(
                                               16,
                                             ),
                                             fontFamily: 'Biryani',
                                             fontWeight: FontWeight.w700,
                                           ),
-                                        ),
+                                        ),),
+                                      ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: hSize*0.02),
+                                  height: hSize*0.15,
+                                  child:TabBarView(
+                                    children: [
+                                     ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemCount: 3,
+                                        itemBuilder: (context, index) {
+                                          return ForYou();
+                                        },
                                       ),
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Container(
-                                          height: getVerticalSize(
-                                            114.00,
-                                          ),
-                                          width: size.width,
-                                          child: Stack(
-                                            alignment: Alignment.bottomLeft,
-                                            children: [
-                                              Align(
-                                                alignment: Alignment.topLeft,
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                    bottom: getVerticalSize(
-                                                      10.00,
-                                                    ),
-                                                  ),
-                                                  child: Container(
-                                                    height: getVerticalSize(
-                                                      100.00,
-                                                    ),
-                                                    width: getHorizontalSize(
-                                                      428.00,
-                                                    ),
-                                                    child: SvgPicture.asset(
-                                                      ImageConstant
-                                                          .imgVector21,
-                                                      fit: BoxFit.fill,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment:
-                                                    Alignment.bottomLeft,
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                    top: getVerticalSize(
-                                                      10.00,
-                                                    ),
-                                                  ),
-                                                  child: Container(
-                                                    height: getVerticalSize(
-                                                      100.00,
-                                                    ),
-                                                    width: getHorizontalSize(
-                                                      428.00,
-                                                    ),
-                                                    child: SvgPicture.asset(
-                                                      ImageConstant
-                                                          .imgVector20,
-                                                      fit: BoxFit.fill,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                      ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemCount: 3,
+                                        itemBuilder: (context, index) {
+                                          return ForYouCook();
+                                        },
                                       ),
+
                                     ],
-                                  ),
+                                  )
                                 ),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      left: getHorizontalSize(
-                                        136.00,
-                                      ),
-                                      top: getVerticalSize(
-                                        31.00,
-                                      ),
-                                      right: getHorizontalSize(
-                                        136.00,
-                                      ),
-                                      bottom: getVerticalSize(
-                                        31.00,
-                                      ),
-                                    ),
-                                    child: Text(
-                                      "Fun Fact of the Day",
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        color: ColorConstant.whiteA700,
-                                        fontSize: getFontSize(
-                                          16,
-                                        ),
-                                        fontFamily: 'Biryani',
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+              ],
                             ),
                           ),
                         ),
@@ -389,1191 +301,192 @@ class _MainPAgeState extends State<MainPAge> with SingleTickerProviderStateMixin
                           child: Padding(
                             padding: EdgeInsets.only(
                               left: getHorizontalSize(
-                                28.00,
+                                24.00,
                               ),
                               top: getVerticalSize(
-                                33.00,
+                                20.00,
                               ),
-                              right: getHorizontalSize(
-                                28.00,
-                              ),
-                            ),
-                            child: Text(
-                              "Confused? Try something new!",
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: ColorConstant.deepOrange700,
-                                fontSize: getFontSize(
-                                  20,
-                                ),
-                                fontFamily: 'Biryani',
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                        ),
-                    Container(
-                      height: getVerticalSize(
-                        367.00,
-                      ),
-                      width: size.width,
-                      child: Stack(
-                        alignment: Alignment.centerLeft,
-                        children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: getHorizontalSize(
-                                  28.00,
-                                ),
-                                right: getHorizontalSize(
-                                  29.00,
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: ColorConstant.gray100,
-                                      borderRadius: BorderRadius.circular(
-                                        getHorizontalSize(
-                                          10.00,
-                                        ),
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: ColorConstant.black90040,
-                                          spreadRadius: getHorizontalSize(
-                                            2.00,
-                                          ),
-                                          blurRadius: getHorizontalSize(
-                                            2.00,
-                                          ),
-                                          offset: Offset(
-                                            1,
-                                            1,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Container(
-                                              width: getHorizontalSize(
-                                                186.00,
-                                              ),
-                                              padding: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  30.00,
-                                                ),
-                                                top: getVerticalSize(
-                                                  17.00,
-                                                ),
-                                                bottom: getVerticalSize(
-                                                  9.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: ColorConstant
-                                                    .deepOrange700,
-                                                borderRadius:
-                                                    BorderRadius.only(
-                                                  topLeft: Radius.circular(
-                                                    getHorizontalSize(
-                                                      10.00,
-                                                    ),
-                                                  ),
-                                                  topRight: Radius.circular(
-                                                    getHorizontalSize(
-                                                      0.00,
-                                                    ),
-                                                  ),
-                                                  bottomLeft: Radius.circular(
-                                                    getHorizontalSize(
-                                                      0.00,
-                                                    ),
-                                                  ),
-                                                  bottomRight:
-                                                      Radius.circular(
-                                                    getHorizontalSize(
-                                                      0.00,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              child: Text(
-                                                "To Dine/Order",
-                                                maxLines: null,
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  color:
-                                                      ColorConstant.whiteA700,
-                                                  fontSize: getFontSize(
-                                                    16,
-                                                  ),
-                                                  fontFamily: 'Biryani',
-                                                  fontWeight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              width: getHorizontalSize(
-                                                185.00,
-                                              ),
-                                              padding: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  30.00,
-                                                ),
-                                                top: getVerticalSize(
-                                                  17.00,
-                                                ),
-                                                bottom: getVerticalSize(
-                                                  9.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: ColorConstant
-                                                    .deepOrange7007f,
-                                                borderRadius:
-                                                    BorderRadius.only(
-                                                  topLeft: Radius.circular(
-                                                    getHorizontalSize(
-                                                      0.00,
-                                                    ),
-                                                  ),
-                                                  topRight: Radius.circular(
-                                                    getHorizontalSize(
-                                                      10.00,
-                                                    ),
-                                                  ),
-                                                  bottomLeft: Radius.circular(
-                                                    getHorizontalSize(
-                                                      0.00,
-                                                    ),
-                                                  ),
-                                                  bottomRight:
-                                                      Radius.circular(
-                                                    getHorizontalSize(
-                                                      0.00,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              child: Text(
-                                                "To Cook",
-                                                maxLines: null,
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  color:
-                                                      ColorConstant.whiteA700,
-                                                  fontSize: getFontSize(
-                                                    16,
-                                                  ),
-                                                  fontFamily: 'Biryani',
-                                                  fontWeight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: getHorizontalSize(
-                                              13.00,
-                                            ),
-                                            top: getVerticalSize(
-                                              14.00,
-                                            ),
-                                            right: getHorizontalSize(
-                                              13.00,
-                                            ),
-                                          ),
-                                          child: Text(
-                                            "Meal Type",
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              color:
-                                                  ColorConstant.deepOrange700,
-                                              fontSize: getFontSize(
-                                                12,
-                                              ),
-                                              fontFamily: 'Biryani',
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Container(
-                                              height: getVerticalSize(
-                                                21.00,
-                                              ),
-                                              width: getHorizontalSize(
-                                                72.00,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  13.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  getHorizontalSize(
-                                                    20.00,
-                                                  ),
-                                                ),
-                                                border: Border.all(
-                                                  color: ColorConstant
-                                                      .deepOrange700,
-                                                  width: getHorizontalSize(
-                                                    1.00,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              height: getVerticalSize(
-                                                21.00,
-                                              ),
-                                              width: getHorizontalSize(
-                                                72.00,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  9.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  getHorizontalSize(
-                                                    20.00,
-                                                  ),
-                                                ),
-                                                border: Border.all(
-                                                  color: ColorConstant
-                                                      .deepOrange700,
-                                                  width: getHorizontalSize(
-                                                    1.00,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              height: getVerticalSize(
-                                                21.00,
-                                              ),
-                                              width: getHorizontalSize(
-                                                72.00,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  9.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  getHorizontalSize(
-                                                    20.00,
-                                                  ),
-                                                ),
-                                                border: Border.all(
-                                                  color: ColorConstant
-                                                      .deepOrange700,
-                                                  width: getHorizontalSize(
-                                                    1.00,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              height: getVerticalSize(
-                                                21.00,
-                                              ),
-                                              width: getHorizontalSize(
-                                                72.00,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  9.00,
-                                                ),
-                                                right: getHorizontalSize(
-                                                  43.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  getHorizontalSize(
-                                                    20.00,
-                                                  ),
-                                                ),
-                                                border: Border.all(
-                                                  color: ColorConstant
-                                                      .deepOrange700,
-                                                  width: getHorizontalSize(
-                                                    1.00,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: getHorizontalSize(
-                                              13.00,
-                                            ),
-                                            top: getVerticalSize(
-                                              9.00,
-                                            ),
-                                            right: getHorizontalSize(
-                                              13.00,
-                                            ),
-                                          ),
-                                          child: Text(
-                                            "Flavors",
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              color:
-                                                  ColorConstant.deepOrange700,
-                                              fontSize: getFontSize(
-                                                12,
-                                              ),
-                                              fontFamily: 'Biryani',
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Container(
-                                              height: getVerticalSize(
-                                                21.00,
-                                              ),
-                                              width: getHorizontalSize(
-                                                72.00,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  13.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  getHorizontalSize(
-                                                    20.00,
-                                                  ),
-                                                ),
-                                                border: Border.all(
-                                                  color: ColorConstant
-                                                      .deepOrange700,
-                                                  width: getHorizontalSize(
-                                                    1.00,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              height: getVerticalSize(
-                                                21.00,
-                                              ),
-                                              width: getHorizontalSize(
-                                                72.00,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  9.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  getHorizontalSize(
-                                                    20.00,
-                                                  ),
-                                                ),
-                                                border: Border.all(
-                                                  color: ColorConstant
-                                                      .deepOrange700,
-                                                  width: getHorizontalSize(
-                                                    1.00,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              height: getVerticalSize(
-                                                21.00,
-                                              ),
-                                              width: getHorizontalSize(
-                                                72.00,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  9.00,
-                                                ),
-                                                right: getHorizontalSize(
-                                                  124.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  getHorizontalSize(
-                                                    20.00,
-                                                  ),
-                                                ),
-                                                border: Border.all(
-                                                  color: ColorConstant
-                                                      .deepOrange700,
-                                                  width: getHorizontalSize(
-                                                    1.00,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: getHorizontalSize(
-                                              13.00,
-                                            ),
-                                            top: getVerticalSize(
-                                              11.00,
-                                            ),
-                                            right: getHorizontalSize(
-                                              13.00,
-                                            ),
-                                          ),
-                                          child: Text(
-                                            "Cuisine",
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              color:
-                                                  ColorConstant.deepOrange700,
-                                              fontSize: getFontSize(
-                                                12,
-                                              ),
-                                              fontFamily: 'Biryani',
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Container(
-                                              height: getVerticalSize(
-                                                21.00,
-                                              ),
-                                              width: getHorizontalSize(
-                                                72.00,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  13.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  getHorizontalSize(
-                                                    20.00,
-                                                  ),
-                                                ),
-                                                border: Border.all(
-                                                  color: ColorConstant
-                                                      .deepOrange700,
-                                                  width: getHorizontalSize(
-                                                    1.00,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              height: getVerticalSize(
-                                                21.00,
-                                              ),
-                                              width: getHorizontalSize(
-                                                72.00,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  9.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  getHorizontalSize(
-                                                    20.00,
-                                                  ),
-                                                ),
-                                                border: Border.all(
-                                                  color: ColorConstant
-                                                      .deepOrange700,
-                                                  width: getHorizontalSize(
-                                                    1.00,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              height: getVerticalSize(
-                                                21.00,
-                                              ),
-                                              width: getHorizontalSize(
-                                                72.00,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  9.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  getHorizontalSize(
-                                                    20.00,
-                                                  ),
-                                                ),
-                                                border: Border.all(
-                                                  color: ColorConstant
-                                                      .deepOrange700,
-                                                  width: getHorizontalSize(
-                                                    1.00,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              height: getVerticalSize(
-                                                21.00,
-                                              ),
-                                              width: getHorizontalSize(
-                                                72.00,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                left: getHorizontalSize(
-                                                  9.00,
-                                                ),
-                                                right: getHorizontalSize(
-                                                  43.00,
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  getHorizontalSize(
-                                                    20.00,
-                                                  ),
-                                                ),
-                                                border: Border.all(
-                                                  color: ColorConstant
-                                                      .deepOrange700,
-                                                  width: getHorizontalSize(
-                                                    1.00,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: Container(
-                                            height: getVerticalSize(
-                                              46.00,
-                                            ),
-                                            width: getHorizontalSize(
-                                              85.00,
-                                            ),
-                                            margin: EdgeInsets.only(
-                                              left: getHorizontalSize(
-                                                13.00,
-                                              ),
-                                              top: getVerticalSize(
-                                                16.00,
-                                              ),
-                                              right: getHorizontalSize(
-                                                13.00,
-                                              ),
-                                            ),
-                                            child: Stack(
-                                              alignment:
-                                                  Alignment.bottomCenter,
-                                              children: [
-                                                Align(
-                                                  alignment:
-                                                      Alignment.topLeft,
-                                                  child: Padding(
-                                                    padding: EdgeInsets.only(
-                                                      bottom: getVerticalSize(
-                                                        10.00,
-                                                      ),
-                                                    ),
-                                                    child: Text(
-                                                      "Take a  Quiz",
-                                                      overflow: TextOverflow
-                                                          .ellipsis,
-                                                      textAlign:
-                                                          TextAlign.left,
-                                                      style: TextStyle(
-                                                        color: ColorConstant
-                                                            .deepOrange700,
-                                                        fontSize: getFontSize(
-                                                          14,
-                                                        ),
-                                                        fontFamily: 'Biryani',
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      Alignment.bottomCenter,
-                                                  child: Padding(
-                                                    padding: EdgeInsets.only(
-                                                      left: getHorizontalSize(
-                                                        25.00,
-                                                      ),
-                                                      top: getVerticalSize(
-                                                        10.00,
-                                                      ),
-                                                      right:
-                                                          getHorizontalSize(
-                                                        25.00,
-                                                      ),
-                                                    ),
-                                                    child: Container(
-                                                      height: getSize(
-                                                        34.00,
-                                                      ),
-                                                      width: getSize(
-                                                        34.00,
-                                                      ),
-                                                      child: SvgPicture.asset(
-                                                        ImageConstant
-                                                            .imgExpandmore,
-                                                        fit: BoxFit.fill,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      top: getVerticalSize(
-                                        56.00,
-                                      ),
-                                      right: getHorizontalSize(
-                                        10.00,
-                                      ),
-                                    ),
-                                    child: Text(
-                                      "Explore Recipies",
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        color: ColorConstant.deepOrange700,
-                                        fontSize: getFontSize(
-                                          20,
-                                        ),
-                                        fontFamily: 'Biryani',
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                top: getVerticalSize(
-                                  144.00,
-                                ),
-                                bottom: getVerticalSize(
-                                  144.00,
-                                ),
-                              ),
-                              child: Container(
-                                height: getVerticalSize(
-                                  70.00,
-                                ),
-                                width: getHorizontalSize(
-                                  428.00,
-                                ),
-                                child: SvgPicture.asset(
-                                  ImageConstant.imgGroup1,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: getVerticalSize(
-                          6.00,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: getHorizontalSize(
-                                    28.00,
-                                  ),
-                                ),
-                                child: Image.asset(
-                                  ImageConstant.imgRectangle156,
-                                  height: getSize(
-                                    97.00,
-                                  ),
-                                  width: getSize(
-                                    97.00,
-                                  ),
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: getHorizontalSize(
-                                    20.00,
-                                  ),
-                                ),
-                                child: Image.asset(
-                                  ImageConstant.imgRectangle154,
-                                  height: getSize(
-                                    97.00,
-                                  ),
-                                  width: getSize(
-                                    97.00,
-                                  ),
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: getHorizontalSize(
-                                    20.00,
-                                  ),
-                                ),
-                                child: Image.asset(
-                                  ImageConstant.imgRectangle155,
-                                  height: getSize(
-                                    97.00,
-                                  ),
-                                  width: getSize(
-                                    97.00,
-                                  ),
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: getHorizontalSize(
-                                    20.00,
-                                  ),
-                                ),
-                                child: Image.asset(
-                                  ImageConstant.imgRectangle157,
-                                  height: getVerticalSize(
-                                    97.00,
-                                  ),
-                                  width: getHorizontalSize(
-                                    49.00,
-                                  ),
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: getVerticalSize(
-                                6.00,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Container(
-                                  width: getHorizontalSize(
-                                    97.00,
-                                  ),
-                                  margin: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      28.00,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Dish Name 1",
-                                    maxLines: null,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: ColorConstant.deepOrange700,
-                                      fontSize: getFontSize(
-                                        16,
-                                      ),
-                                      fontFamily: 'Biryani',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: getHorizontalSize(
-                                    97.00,
-                                  ),
-                                  margin: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      20.00,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Dish Name 2",
-                                    maxLines: null,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: ColorConstant.deepOrange700,
-                                      fontSize: getFontSize(
-                                        16,
-                                      ),
-                                      fontFamily: 'Biryani',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: getHorizontalSize(
-                                    97.00,
-                                  ),
-                                  margin: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      20.00,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Dish Name 3",
-                                    maxLines: null,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: ColorConstant.deepOrange700,
-                                      fontSize: getFontSize(
-                                        16,
-                                      ),
-                                      fontFamily: 'Biryani',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: getHorizontalSize(
-                                    49.00,
-                                  ),
-                                  margin: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      20.00,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Dish Name 4",
-                                    maxLines: null,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: ColorConstant.deepOrange700,
-                                      fontSize: getFontSize(
-                                        16,
-                                      ),
-                                      fontFamily: 'Biryani',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: getHorizontalSize(
-                                28.00,
-                              ),
-                              top: getVerticalSize(
-                                19.00,
-                              ),
-                              right: getHorizontalSize(
-                                28.00,
-                              ),
-                            ),
-                            child: Text(
-                              "Explore Restaurants",
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: ColorConstant.deepOrange700,
-                                fontSize: getFontSize(
-                                  20,
-                                ),
-                                fontFamily: 'Biryani',
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: getVerticalSize(
-                                6.00,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      28.00,
-                                    ),
-                                  ),
-                                  child: Image.asset(
-                                    ImageConstant.imgRectangle161,
-                                    height: getSize(
-                                      97.00,
-                                    ),
-                                    width: getSize(
-                                      97.00,
-                                    ),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      20.00,
-                                    ),
-                                  ),
-                                  child: Image.asset(
-                                    ImageConstant.imgRectangle158,
-                                    height: getSize(
-                                      97.00,
-                                    ),
-                                    width: getSize(
-                                      97.00,
-                                    ),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      20.00,
-                                    ),
-                                  ),
-                                  child: Image.asset(
-                                    ImageConstant.imgRectangle159,
-                                    height: getSize(
-                                      97.00,
-                                    ),
-                                    width: getSize(
-                                      97.00,
-                                    ),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      20.00,
-                                    ),
-                                  ),
-                                  child: Image.asset(
-                                    ImageConstant.imgRectangle160,
-                                    height: getVerticalSize(
-                                      97.00,
-                                    ),
-                                    width: getHorizontalSize(
-                                      49.00,
-                                    ),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: getVerticalSize(
-                                6.00,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Container(
-                                  width: getHorizontalSize(
-                                    97.00,
-                                  ),
-                                  margin: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      28.00,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Dish Name 1",
-                                    maxLines: null,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: ColorConstant.deepOrange700,
-                                      fontSize: getFontSize(
-                                        16,
-                                      ),
-                                      fontFamily: 'Biryani',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: getHorizontalSize(
-                                    97.00,
-                                  ),
-                                  margin: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      20.00,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Dish Name 2",
-                                    maxLines: null,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: ColorConstant.deepOrange700,
-                                      fontSize: getFontSize(
-                                        16,
-                                      ),
-                                      fontFamily: 'Biryani',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: getHorizontalSize(
-                                    97.00,
-                                  ),
-                                  margin: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      20.00,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Dish Name 3",
-                                    maxLines: null,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: ColorConstant.deepOrange700,
-                                      fontSize: getFontSize(
-                                        16,
-                                      ),
-                                      fontFamily: 'Biryani',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: getHorizontalSize(
-                                    49.00,
-                                  ),
-                                  margin: EdgeInsets.only(
-                                    left: getHorizontalSize(
-                                      20.00,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Dish Name 4",
-                                    maxLines: null,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: ColorConstant.deepOrange700,
-                                      fontSize: getFontSize(
-                                        16,
-                                      ),
-                                      fontFamily: 'Biryani',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
 
-                    ),
+                            ),
+                            child: Text(
+                              "Confused?",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                color: ColorConstant.black900,
+                                fontSize: getFontSize(
+                                  24,
+                                ),
+                                fontFamily: 'Biryani',
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            height: hSize*0.18,
+                            width: double.infinity,
+                            margin: EdgeInsets.only(
+                              left: getHorizontalSize(
+                                10.00,
+                              ),
+                              top: getVerticalSize(5),
+                              right: getHorizontalSize(
+                                10.00,
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              color: ColorConstant.whiteA700,
+                              border: Border.all(width: 1.0,color: ColorConstant.deepOrange700.withOpacity(0.5)),
+                              borderRadius: BorderRadius.circular(
+                                getHorizontalSize(
+                                  10.00,
+                                ),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ColorConstant.deepOrange700,
+                                  spreadRadius: getHorizontalSize(
+                                    2.00,
+                                  ),
+                                  blurRadius: getHorizontalSize(
+                                    2.00,
+                                  ),
+                                  offset: Offset(
+                                    5,
+                                    5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: hSize*0.05,
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(top: hSize*0.01,left: wSize*0.03),
+                                        child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemCount: filters.length,
+                                        itemBuilder: (context, index) {
+                                          return Filters(index:filters[index]);
+                                        },
+                                    ),
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white
+                                        ),
+                                        margin: EdgeInsets.only(left: wSize*0.8),
+                                        alignment: Alignment.center,
+                                        height: getSize(
+                                          50.00,
+                                        ),
+                                        width: getSize(
+                                          80.00,
+                                        ),
+                                        child: SvgPicture.asset(
+                                          ImageConstant.imgMifilter,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+
+                            ],
+                                  ),
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width:wSize*0.4,
+                                      child: Column(
+                                      children: [
+                                        Padding(
+                                        padding: EdgeInsets.only(top: getVerticalSize(5)),
+                                        child: ListTile(
+                                          title: const Text('To Cook'),
+                                          contentPadding: EdgeInsets.all(0),
+                                          visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+
+                                          leading: Radio(
+                                            value: "To Cook",
+                                            activeColor: ColorConstant.deepOrange700,
+                                            groupValue: _site,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _site = value.toString();
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                        ListTile(
+                                          title: const Text('To Dine/Order'),
+                                          contentPadding: EdgeInsets.all(0),
+                                          visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+                                          leading: Radio(
+                                            value: "TO Dine",
+                                            groupValue: _site,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _site = value.toString();
+                                              });
+                                            },
+                                          ),
+                                        ),
+              ],
+                                  ),
+                                    ),
+
+                                    Container(
+                                      margin: EdgeInsets.only(top: hSize*0.052,left: wSize*0.04),
+                                      alignment: Alignment.center,
+                                      height: getVerticalSize(
+                                        35.00,
+                                      ),
+                                      width: getHorizontalSize(
+                                        110.00,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: ColorConstant
+                                            .deepOrangeA400,
+                                        borderRadius:
+                                        BorderRadius.circular(
+                                          getHorizontalSize(
+                                            6.00,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        "Suggest me a dish",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: ColorConstant
+                                              .whiteA700,
+                                          fontSize: getFontSize(
+                                            14,
+                                          ),
+                                          fontFamily: 'Biryani',
+                                          fontWeight:
+                                          FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Group53ItemWidget(),
+
+
+        //
                   ],
                 ),
               ),
