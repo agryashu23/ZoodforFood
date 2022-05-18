@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "383289798938",
+    "firebase_url": "https://zoodforfood-835a0-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "zoodforfood-835a0",
+    "storage_bucket": "zoodforfood-835a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383289798938:android:561192e86723177c867ca3",
+        "android_client_info": {
+          "package_name": "com.example.zoodforfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383289798938-k5j15oe50m3lepfvui9nklhma74c9ntl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.zoodforfood",
+            "certificate_hash": "9cf47f778499f7f23b1d55bd452d4b3f809b4e84"
+          }
+        },
+        {
+          "client_id": "383289798938-q2btt457o4ubaacjmbalfhcp5nk08i5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG-P1ljGtVocfisPHk_jlD7oEzUER_V1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383289798938-q2btt457o4ubaacjmbalfhcp5nk08i5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

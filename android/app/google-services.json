@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "125430801169",
+    "project_id": "zoodforfood-33cab",
+    "storage_bucket": "zoodforfood-33cab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125430801169:android:79ccd7f5fb1252f29922b0",
+        "android_client_info": {
+          "package_name": "com.example.zoodforfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125430801169-59qu9634uda6o5gi4f34bfi8nhr40foi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.zoodforfood",
+            "certificate_hash": "9cf47f778499f7f23b1d55bd452d4b3f809b4e84"
+          }
+        },
+        {
+          "client_id": "125430801169-3ose293qo1nldrscu3urou0ckk45enl7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcMh7h77pnNOCX2HfI9GRrd7SCSfhXTJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125430801169-3ose293qo1nldrscu3urou0ckk45enl7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
